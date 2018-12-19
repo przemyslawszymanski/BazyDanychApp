@@ -278,6 +278,9 @@ namespace WpfApp1
         private void List_Book_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             index_books = List_Book.SelectedIndex + 1; //informacja o naciśniętym indexie w tabeli Listy Książek
+            if (dc.Ksiazka.SingleOrDefault(x => x.Pk_Ksiazka_Id == index_books) == null)
+                return;
+            
             Ksiazka ksiazka = dc.Ksiazka.SingleOrDefault(x => x.Pk_Ksiazka_Id == index_books);
 
             Borrow_Book.Visibility = Visibility.Visible; //wyświetlenie okna do wypożyczenia
@@ -290,7 +293,7 @@ namespace WpfApp1
             {
                 Bookavailable.Visibility = Visibility.Visible;
             }
-            else
+            else if(Bookstatus == "wypozyczona")
             {
                 Booknotavailable.Visibility = Visibility.Visible;
             }
