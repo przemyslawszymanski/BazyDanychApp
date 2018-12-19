@@ -1,0 +1,217 @@
+﻿<Window x:Class="WpfApp1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="1000" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" Foreground="White">
+    <Window.Resources>
+        <Storyboard x:Key="MenuOpen">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenu">
+                <EasingDoubleKeyFrame KeyTime="0" Value="60"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="200"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="BookList">
+                <EasingDoubleKeyFrame KeyTime="0" Value="940"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="800"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="RentBook">
+                <EasingDoubleKeyFrame KeyTime="0" Value="940"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="800"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="AddBook">
+                <EasingDoubleKeyFrame KeyTime="0" Value="940"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="800"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="USERSLIST">
+                <EasingDoubleKeyFrame KeyTime="0" Value="940"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="800"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="MenuClose">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenu">
+                <EasingDoubleKeyFrame KeyTime="0" Value="200"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="60"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="BookList">
+                <EasingDoubleKeyFrame KeyTime="0" Value="800"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="940"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="RentBook">
+                <EasingDoubleKeyFrame KeyTime="0" Value="800"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="940"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="AddBook">
+                <EasingDoubleKeyFrame KeyTime="0" Value="800"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="940"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="USERSLIST">
+                <EasingDoubleKeyFrame KeyTime="0" Value="800"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="940"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Window.Resources>
+
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="ButtonOpenMenu">
+            <BeginStoryboard Storyboard="{StaticResource MenuOpen}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="ButtonCloseMenu">
+            <BeginStoryboard Storyboard="{StaticResource MenuClose}"/>
+        </EventTrigger>
+    </Window.Triggers>
+
+    <Grid Background="LightGray">
+        <Grid Height="60" VerticalAlignment="Top" Background="#FF3896AD">
+            <TextBlock Text="BIBLIOTEKA" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36"/>
+            <StackPanel VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock x:Name="User" Text="User" VerticalAlignment="Center" FontSize="18"/>
+                <materialDesign:PopupBox Margin="10" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
+                    <StackPanel Width="150">
+                        <Button x:Name="ButtonUser" Content="Użytkownicy" Click="ButtonUser_Click"/>
+                        <Button Content="Pomoc"/>
+                        <Separator/>
+                        <Button x:Name="ButtonPopUpExit" Content="Wyjście" Click="ButtonPopUpExit_Click"/>
+                    </StackPanel>
+                </materialDesign:PopupBox>
+            </StackPanel>
+        </Grid>
+        
+        <Grid x:Name="GridMenu" Width="60" HorizontalAlignment="Left" Background="#FF04647C">
+            <StackPanel>
+                <Grid Height="60" Background="White">
+                    <Button x:Name="ButtonCloseMenu" Width="60" BorderThickness="60" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Center" HorizontalAlignment="Right" Visibility="Collapsed" Click="ButtonCloseMenu_Click">
+                        <materialDesign:PackIcon Foreground="#FF04647C" Kind="ArrowLeft" Width="25" Height="25"/>
+                    </Button>
+                    <Button x:Name="ButtonOpenMenu" Width="60" BorderThickness="60" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Center" HorizontalAlignment="Center" Click="ButtonOpenMenu_Click">
+                        <materialDesign:PackIcon Foreground="#FF04647C" Kind="Menu" Width="25" Height="25"/>
+                    </Button>
+                </Grid>
+                <ListView x:Name="ListViewMenu" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Foreground="#FF3896AD" SelectionChanged="ListViewMenu_SelectionChanged">
+                    <ListViewItem Height="60">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="BookOpenVariant" Width="25" Height="25" Margin="10" VerticalAlignment="Center"/>
+                            <TextBlock Text="Lista książek" VerticalAlignment="Center" Margin="20 10"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Height="60">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="BookMinus" Width="25" Height="25" Margin="10"  VerticalAlignment="Center"/>
+                            <TextBlock Text="Zwrot książki" VerticalAlignment="Center" Margin="20 10"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Height="60" >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="BookPlus" Width="25" Height="25" Margin="10"  VerticalAlignment="Center"/>
+                            <TextBlock Text="Dodaj książkę" VerticalAlignment="Center" Margin="20 10"/>
+                        </StackPanel>
+                    </ListViewItem>
+                </ListView>
+            </StackPanel>
+        </Grid>
+
+        <Grid x:Name="USERSLIST" Height="540" Width="940" VerticalAlignment="Bottom" HorizontalAlignment="Right" Visibility="Visible">
+            
+            <Grid  Margin="20" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <TextBlock Text="UŻYTKOWNICY" Margin="150 0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="22" Foreground="#FF04647C" FontWeight="Bold"/>
+                        <Button x:Name="USERSLISTadd" Width="60" BorderThickness="60" Margin="100 0"  BorderBrush="{x:Null}" VerticalAlignment="Center" HorizontalAlignment="Right" Click="USERSLISTadd_Click">
+                            <materialDesign:PackIcon Foreground="#FF04647C" Kind="Add" Width="30" Height="30"/>
+                        </Button>
+                    </StackPanel>
+                    <DataGrid Name="List_Users" Margin="0 10" Height="480" HorizontalAlignment="Stretch" SelectionChanged="List_Users_SelectionChanged"></DataGrid>
+                </StackPanel>
+            </Grid>
+
+            <Grid x:Name="Add_Users" Height="540" Width="940" VerticalAlignment="Bottom" HorizontalAlignment="Right" Visibility="Collapsed">
+                <Grid  Margin="200 80" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="LightGray">
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock Text="DODAJ UŻYTKOWNIKA" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="22" Foreground="#FF04647C" FontWeight="Bold"/>
+                        <StackPanel Margin="10">
+                            <TextBlock Text="Imie" Foreground="#FF04647C" HorizontalAlignment="Left" FontSize="18"/>
+                            <TextBox x:Name="Name"/>
+                            <TextBlock Text="Nazwisko" Foreground="#FF04647C" HorizontalAlignment="Left" FontSize="18"/>
+                            <TextBox x:Name="Surname"/>
+                            <TextBlock Text="Email" Foreground="#FF04647C" HorizontalAlignment="Left" FontSize="18"/>
+                            <TextBox x:Name="Email"/>
+                            <TextBlock Text="Telefon" Foreground="#FF04647C" HorizontalAlignment="Left" FontSize="18"/>
+                            <TextBox x:Name="Phone"/>
+                            <TextBlock Text="Adres" Foreground="#FF04647C" HorizontalAlignment="Left" FontSize="18"/>
+                            <TextBox x:Name="Address"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button x:Name="ButtonUser1" Content="Anuluj" Margin="10" Background="#FF04647C" Click="ButtonUser1_Click"/>
+                            <Button x:Name="ButtonAddUser" Content="Dodaj" Margin="10" Background="#FF3896AD" Click="ButtonAddUser_Click"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Grid>
+        
+        <Grid x:Name="BookList" Height="540" Width="940" VerticalAlignment="Bottom" HorizontalAlignment="Right" Visibility="Collapsed">
+            
+            <Grid  Margin="20" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <StackPanel>
+                    <TextBlock Text="LISTA KSIĄŻEK" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="22" Foreground="#FF04647C" FontWeight="Bold"/>
+                    <DataGrid Name="List_Book" Margin="0 10" Height="480" HorizontalAlignment="Stretch" SelectionChanged="List_Book_SelectionChanged"></DataGrid>
+                </StackPanel>
+            </Grid>
+            
+            <Grid x:Name="Borrow_Book" Height="540" Width="940" VerticalAlignment="Bottom" HorizontalAlignment="Right" Visibility="Collapsed">
+                <Grid  Margin="200" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="LightGray">
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock Text="WYPOŻYCZENIE" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="22" Foreground="#FF04647C" FontWeight="Bold"/>
+                        <StackPanel x:Name="Bookavailable" VerticalAlignment="Center" HorizontalAlignment="Stretch" Visibility="Collapsed">
+                            <TextBlock Text="Czy chcesz wypożyczyć ksiażkę?" Foreground="#FF04647C" HorizontalAlignment="Center" FontSize="18"/>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Button x:Name="ButtonBorrow1" Content="Anuluj" Margin="10" Background="#FF04647C" Click="ButtonBorrow1_Click"/>
+                                <Button x:Name="ButtonBorrowBook" Content="Wypożycz" Margin="10" Background="#FF3896AD" Click="ButtonBorrowBook_Click"/>
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel x:Name="Booknotavailable" VerticalAlignment="Center" HorizontalAlignment="Stretch" Visibility="Collapsed">
+                            <TextBlock Text="Książka niedostępna." Foreground="#FFFF0B0B" HorizontalAlignment="Center" FontSize="22"/>
+                            <Button x:Name="ButtonBorrow2" Content="Wróć" Margin="10" Background="#FF04647C" Click="ButtonBorrow2_Click"/>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Grid>
+
+        <Grid x:Name="RentBook" Height="540" Width="940" VerticalAlignment="Bottom" HorizontalAlignment="Right" Visibility="Collapsed">
+            
+            <Grid  Margin="20" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <StackPanel>
+                    <TextBlock Text="TWOJE WYPOŻYCZONE KSIĄŻKI" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="22" Foreground="#FF04647C" FontWeight="Bold"/>
+                    <DataGrid Name="Return1_Book" Margin="0 10" Height="480" HorizontalAlignment="Stretch" SelectionChanged="Return1_Book_SelectionChanged"></DataGrid>
+                </StackPanel>
+            </Grid>
+
+            <Grid x:Name="Return_Book" Height="540" Width="940" VerticalAlignment="Bottom" HorizontalAlignment="Right" Visibility="Collapsed">
+                <Grid  Margin="200" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="LightGray">
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock Text="ZWROT" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="22" Foreground="#FF04647C" FontWeight="Bold"/>
+                        <TextBlock Text="Czy chcesz zwrócić ksiażkę?" Foreground="#FF04647C" HorizontalAlignment="Center" FontSize="18"/>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button x:Name="ButtonBook1" Content="Anuluj" Margin="10" Background="#FF04647C" Click="ButtonBook1_Click"/>
+                            <Button x:Name="ButtonReturnBook" Content="Zwróć" Margin="10" Background="#FF3896AD" Click="ButtonReturnBook_Click"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Grid>
+
+        <Grid x:Name="AddBook" Height="540" Width="940" VerticalAlignment="Bottom" HorizontalAlignment="Right" Visibility="Collapsed">
+            <Grid  Margin="20" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <StackPanel>
+                    <TextBlock Text="DODAJ KSIĄŻKĘ" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="22" Foreground="#FF04647C" FontWeight="Bold"/>
+                    <DataGrid Name="Add_Book" Margin="0 10" Height="480" HorizontalAlignment="Stretch"></DataGrid>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

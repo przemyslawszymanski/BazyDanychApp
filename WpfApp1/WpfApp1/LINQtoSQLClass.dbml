@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="BibliotekaDB" Class="LINQtoSQLClassDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=servermaster.database.windows.net;Initial Catalog=BibliotekaDB;User ID=adminbazy;Connect Timeout=30;Encrypt=True;TrustServerCertificate=False" SettingsObjectName="WpfApp1.Properties.Settings" SettingsPropertyName="BibliotekaDBConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Ksiazka" Member="Ksiazka">
+    <Type Name="Ksiazka">
+      <Column Name="Pk_Ksiazka_Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Tytul" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="Fk_Author_Id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Fk_Kategoria_Id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Wydawnictwo" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="Dostepnosc" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Association Name="Ksiazka_Wypozyczenie" Member="Wypozyczenie" ThisKey="Pk_Ksiazka_Id" OtherKey="Fk_Ksiazka_Id" Type="Wypozyczenie" />
+      <Association Name="Kategoria_Ksiazka" Member="Kategoria" ThisKey="Fk_Kategoria_Id" OtherKey="Pk_Kategoria_Id" Type="Kategoria" IsForeignKey="true" />
+      <Association Name="Autor_Ksiazka" Member="Autor" ThisKey="Fk_Author_Id" OtherKey="Pk_Autor_Id" Type="Autor" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Kategoria" Member="Kategoria">
+    <Type Name="Kategoria">
+      <Column Name="Pk_Kategoria_Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Kategoria" Member="Kategoria1" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Association Name="Kategoria_Ksiazka" Member="Ksiazka" ThisKey="Pk_Kategoria_Id" OtherKey="Fk_Kategoria_Id" Type="Ksiazka" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Autor" Member="Autor">
+    <Type Name="Autor">
+      <Column Name="Pk_Autor_Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Imie" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="Nazwisko" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Association Name="Autor_Ksiazka" Member="Ksiazka" ThisKey="Pk_Autor_Id" OtherKey="Fk_Author_Id" Type="Ksiazka" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Czytelnik" Member="Czytelnik">
+    <Type Name="Czytelnik">
+      <Column Name="Pk_Czytelnik_Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Imie" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="Naziwsko" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="Telefon" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="Adres" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Association Name="Czytelnik_Wypozyczenie" Member="Wypozyczenie" ThisKey="Pk_Czytelnik_Id" OtherKey="Fk_Czytelnik_Id" Type="Wypozyczenie" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Wypozyczenie" Member="Wypozyczenie">
+    <Type Name="Wypozyczenie">
+      <Column Name="Pk_Wypozyczenie_Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Fk_Ksiazka_Id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Fk_Czytelnik_Id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Data_oddania" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Association Name="Czytelnik_Wypozyczenie" Member="Czytelnik" ThisKey="Fk_Czytelnik_Id" OtherKey="Pk_Czytelnik_Id" Type="Czytelnik" IsForeignKey="true" />
+      <Association Name="Ksiazka_Wypozyczenie" Member="Ksiazka" ThisKey="Fk_Ksiazka_Id" OtherKey="Pk_Ksiazka_Id" Type="Ksiazka" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>
